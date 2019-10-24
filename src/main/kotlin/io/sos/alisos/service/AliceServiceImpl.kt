@@ -20,7 +20,9 @@ open class AliceServiceImpl() : AliceService {
 
         logger.info("$user_id request an ambulance: ${user.address}; ${user.phone}; ${user.anamnesis}")
 
-        return if (actualUser.address == null && actualUser.phone == null) {
+        return if (actualUser.anamnesis.isNullOrEmpty()) {
+            Response(false, "Что случилось?")
+        } else if (actualUser.address == null && actualUser.phone == null) {
             Response(false, "Чтобы позвать врача, нужны адрес и телефон.")
         } else if (actualUser.address != null && actualUser.phone == null) {
             Response(false, "Какой номер телефона передать врачу?")
