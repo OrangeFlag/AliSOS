@@ -6,14 +6,16 @@ import java.io.IOException
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
+import java.lang.IllegalArgumentException
+import java.math.BigDecimal
 
 
-class EntitiesDeserializer : JsonDeserializer<Entities?>() {
+class EntitiesDeserializer : JsonDeserializer<Entity?>() {
     @Throws(IOException::class, JsonProcessingException::class)
-    override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): Entities? {
+    override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): Entity? {
 
-        val oc = jp.codec
-        val node = oc.readTree<JsonNode>(jp)
+        val objectCodec = jp.codec
+        val node = objectCodec.readTree<JsonNode>(jp)
 
         val type = node.get("type").asText()
 
@@ -21,38 +23,22 @@ class EntitiesDeserializer : JsonDeserializer<Entities?>() {
 
         return when (type) {
             "YANDEX.GEO" -> {
-                Entities(
-                    "YANDEX.GEO", yandexGeo = YandexGeo(
-                        value.get("house_number").asText(),
-                        value.get("street").asText()
-                    )
-                )
+                val parsedObject = objectCodec.treeToValue(value, YandexGeo::class.java)
+                Entity(type, yandexGeo = parsedObject)
             }
             "YANDEX.FIO" -> {
-                Entities(
-                    "YANDEX.FIO", yandexFIO = YandexFIO(
-                        value.get("first_name").asText(),
-                        value.get("last_name").asText()
-                    )
-                )
+                val parsedObject = objectCodec.treeToValue(value, YandexFio::class.java)
+                Entity(type, yandexFio = parsedObject)
             }
             "YANDEX.NUMBER" -> {
-                Entities(
-                    "YANDEX.NUMBER",
-                    yandexNumber = YandexNumber(value.asInt())
-                )
+                val parsedObject = objectCodec.treeToValue(value, BigDecimal::class.java)
+                Entity(type, yandexNumber = parsedObject)
             }
             "YANDEX.DATETIME" -> {
-                Entities(
-                    "YANDEX.DATETIME", yandexDatetime = YandexDatetime(
-                        value.get("day").asText(),
-                        value.get("day_is_relative").asBoolean()
-                    )
-                )
+                val parsedObject = objectCodec.treeToValue(value, YandexDatetime::class.java)
+                Entity(type, yandexDatetime = parsedObject)
             }
-            else -> {
-                null
-            }
+            else -> throw IllegalArgumentException("$type type is not supported")
 
         }
 

@@ -28,13 +28,13 @@ class AliceController() {
             Response()
         )
 
-        val userId = request.session.user_id
+        val userId = request.session.userId
 
         val user = User(
-            request.request.original_utterance,
-            request.request.nlu.entities.singleOrNull { x -> x.type == "YANDEX.GEO" }?.yandexGeo?.let { "${it.street} ${it.house_number}" },
+            request.request.originalUtterance,
+            request.request.nlu.entities.singleOrNull { x -> x.type == "YANDEX.GEO" }?.yandexGeo?.let { "${it.street} ${it.houseNumber}" },
             Regex("""\+?[\d-()]{10,20}""").let {
-                it.find(request.request.original_utterance)?.value
+                it.find(request.request.originalUtterance)?.value
             }
         )
 

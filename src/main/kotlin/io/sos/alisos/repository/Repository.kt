@@ -5,7 +5,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-open class Repository() {
+open class Repository {
     protected var memory = HashMap<String, User>()
 
     operator fun get(user_id: String): User? {
