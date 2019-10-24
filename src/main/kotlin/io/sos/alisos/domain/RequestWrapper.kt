@@ -10,8 +10,7 @@ open class Session {
     @NotBlank
     lateinit var session_id: String
 
-    @NotBlank
-    lateinit var message_id: String
+    var message_id: Int = 0
 
     @NotBlank
     lateinit var user_id: String
