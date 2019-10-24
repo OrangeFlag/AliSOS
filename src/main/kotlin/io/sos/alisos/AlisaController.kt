@@ -5,13 +5,14 @@ import io.micronaut.http.annotation.*
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
 
+
+var logger = LoggerFactory.getLogger(AlisaController::class.java)
+
+@Inject
+lateinit var repository: Repository
+
 @Controller
-object AlisaController {
-
-    @Inject
-    lateinit var repository: Repository
-
-    var logger = LoggerFactory.getLogger(AlisaController.javaClass)
+class AlisaController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Post("/webhook")
