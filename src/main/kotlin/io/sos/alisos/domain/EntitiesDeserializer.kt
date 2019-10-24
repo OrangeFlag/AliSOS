@@ -1,4 +1,4 @@
-package io.sos.alisos
+package io.sos.alisos.domain
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.core.JsonProcessingException
@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 
 
-class EntitiesDeserializer : JsonDeserializer<Entities>() {
+class EntitiesDeserializer : JsonDeserializer<Entities?>() {
     @Throws(IOException::class, JsonProcessingException::class)
-    override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): Entities {
+    override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): Entities? {
 
         val oc = jp.codec
         val node = oc.readTree<JsonNode>(jp)
@@ -21,7 +21,7 @@ class EntitiesDeserializer : JsonDeserializer<Entities>() {
 
         return when (type) {
             "YANDEX.GEO" -> {
-                return Entities(
+                Entities(
                     "YANDEX.GEO", yandexGeo = YandexGeo(
                         value.get("house_number").asText(),
                         value.get("street").asText()
@@ -29,7 +29,7 @@ class EntitiesDeserializer : JsonDeserializer<Entities>() {
                 )
             }
             "YANDEX.FIO" -> {
-                return Entities(
+                Entities(
                     "YANDEX.FIO", yandexFIO = YandexFIO(
                         value.get("first_name").asText(),
                         value.get("last_name").asText()
@@ -37,10 +37,13 @@ class EntitiesDeserializer : JsonDeserializer<Entities>() {
                 )
             }
             "YANDEX.NUMBER" -> {
-                return Entities("YANDEX.NUMBER", yandexNumber = YandexNumber(value.asInt()))
+                Entities(
+                    "YANDEX.NUMBER",
+                    yandexNumber = YandexNumber(value.asInt())
+                )
             }
             "YANDEX.DATETIME" -> {
-                return Entities(
+                Entities(
                     "YANDEX.DATETIME", yandexDatetime = YandexDatetime(
                         value.get("day").asText(),
                         value.get("day_is_relative").asBoolean()
@@ -48,7 +51,7 @@ class EntitiesDeserializer : JsonDeserializer<Entities>() {
                 )
             }
             else -> {
-                Entities()
+                null
             }
 
         }
