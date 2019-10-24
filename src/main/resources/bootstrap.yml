@@ -1,0 +1,5 @@
+micronaut:
+  application:
+    name: alisos
+  server:
+    port: "${PORT:8080}"

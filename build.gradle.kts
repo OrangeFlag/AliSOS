@@ -1,8 +1,10 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.50"
     kotlin("kapt") version "1.3.50"
+    id("com.github.johnrengelman.shadow") version "5.1.0"
 }
 
 group = "io.sos"
@@ -13,15 +15,29 @@ repositories {
     mavenCentral()
 }
 
-//mainClassName = "io.sos.alisos.Application"
+tasks.register("stage") {
+    this.dependsOn("clean", "shadowJar")
+}
+tasks.getByPath("shadowJar").mustRunAfter("clean")
 
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(platform("io.micronaut:micronaut-bom:1.2.5"))
+    kapt(platform("io.micronaut:micronaut-bom:1.2.5"))
     kapt("io.micronaut:micronaut-inject-java:1.2.5")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut:micronaut-http-server-netty")
+    implementation("org.slf4j:slf4j-simple:1.7.28")
+    implementation("org.slf4j:slf4j-api:1.7.28")
 }
+
+tasks.withType<ShadowJar> {
+    manifest.attributes.apply {
+        put("Main-Class", "io.sos.alisos.Application")
+    }
+    mergeServiceFiles()
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
