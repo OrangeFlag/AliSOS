@@ -3,6 +3,7 @@ var router = express.Router();
 
 
 var pgp = require("pg-promise")(/*options*/);
+
 var dbUrl = require('./../dbConfig');
 var db = pgp(process.env.DB_URL ||dbUrl.postgresUrl);
 
