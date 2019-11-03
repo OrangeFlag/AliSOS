@@ -3,9 +3,14 @@ var router = express.Router();
 
 
 var pgp = require("pg-promise")();
+var dbUrl;
+try {
+    dbUrl = require('./../dbConfig');
+} catch (e) {
+    console.log('no config file');
+}
+var db = pgp(process.env.DB_URL || dbUrl.postgresUrl);
 
-var dbUrl = require('./../dbConfig');
-var db = pgp(process.env.DB_URL ||dbUrl.postgresUrl);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
