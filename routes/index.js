@@ -3,7 +3,8 @@ var router = express.Router();
 
 
 var pgp = require("pg-promise")(/*options*/);
-var db = pgp("postgres://lbxsqmas:Bohr3t9BKkJ3AsjLaG2qUM1S00ixg4pA@balarama.db.elephantsql.com:5432/lbxsqmas");
+var dbUrl = require('./../dbConfig')
+var db = pgp(dbUrl.postgresUrl);
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
