@@ -34,7 +34,7 @@ router.post('/patient', function (req, res, next) {
                 .catch(function (error) {
                     console.log("ERROR:", error);
                 });
-        } else{
+        } else {
             db.query(
                 "INSERT INTO public.patient (\"userid\", \"anamnesis\", \"address\", \"phone\", \"time\", \"id\") VALUES ($1, $2, $3, $4, to_timestamp($5 / 1000.0), DEFAULT)",
                 [patient.userId, patient.anamnesis, patient.address, patient.phone, patient.timestamp])
