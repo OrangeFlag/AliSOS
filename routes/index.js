@@ -15,8 +15,8 @@ router.post('/patient', function (req, res, next) {
         "userId": req.body.userId,
         "anamnesis": req.body.anamnesis,
         "address": req.body.address,
-        "phone": req.body.phone
-        //"doctorType": req.body.doctorType
+        "phone": req.body.phone,
+        "timestamp": Date.now()
     }
     if (req.body.doctorType) {
         patient.doctorType = req.body.doctorType;
@@ -25,8 +25,8 @@ router.post('/patient', function (req, res, next) {
         if (patient.doctorType) {
 
             db.query(
-                "INSERT INTO public.patient (\"userid\", \"anamnesis\", \"address\", \"phone\", \"doctortype\", \"id\") VALUES ($1, $2, $3, $4, $5, DEFAULT)",
-                [patient.userId, patient.anamnesis, patient.address, patient.phone, patient.doctorType])
+                "INSERT INTO public.patient (\"userid\", \"anamnesis\", \"address\", \"phone\", \"doctortype\", \"time\", \"id\") VALUES ($1, $2, $3, $4, $5, to_timestamp($6 / 1000.0), DEFAULT)",
+                [patient.userId, patient.anamnesis, patient.address, patient.phone, patient.doctorType, patient.timestamp])
                 .then(function () {
                     res.send(JSON.stringify(patient));
                 })
@@ -35,8 +35,8 @@ router.post('/patient', function (req, res, next) {
                 });
         } else{
             db.query(
-                "INSERT INTO public.patient (\"userid\", \"anamnesis\", \"address\", \"phone\", \"id\") VALUES ($1, $2, $3, $4, DEFAULT)",
-                [patient.userId, patient.anamnesis, patient.address, patient.phone])
+                "INSERT INTO public.patient (\"userid\", \"anamnesis\", \"address\", \"phone\", \"time\", \"id\") VALUES ($1, $2, $3, $4, to_timestamp($5 / 1000.0), DEFAULT)",
+                [patient.userId, patient.anamnesis, patient.address, patient.phone, patient.timestamp])
                 .then(function () {
                     res.send(JSON.stringify(patient));
                 })
@@ -45,7 +45,7 @@ router.post('/patient', function (req, res, next) {
                 });
         }
     } else {
-        res.status(412).send('incorrect patient data');
+        res.status(400).send('incorrect patient data');
     }
 
 
