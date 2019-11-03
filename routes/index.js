@@ -11,11 +11,19 @@ router.post('/patient', function (req, res, next) {
       "userId": req.body.userId,
       "anamnesis": req.body.anamnesis,
       "address": req.body.address,
-      "phone": req.body.phone,
-      "doctorType": req.body.doctorType
+      "phone": req.body.phone
+      //"doctorType": req.body.doctorType
+  }
+  if(req.body.doctorType){
+      patient.doctorType = req.body.doctorType;
+  }
+  if(patient.userId && patient.phone && patient.anamnesis && patient.address){
+      res.send(JSON.stringify(patient));
+  } else{
+      res.status(412).send('incorrect patient data');
   }
 
-  res.send(JSON.stringify(patient));
+
 });
 
 module.exports = router;
