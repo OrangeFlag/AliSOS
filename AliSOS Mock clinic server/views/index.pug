@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p post to /patient
+  code: p(style='white-space:pre;')
+          |{
+          |  "userId": "string",
+          |  "anamnesis": "string",
+          |  "address": "string",
+          |  "phone": "string",
+          |  "doctorType": "string?"
+          |}
