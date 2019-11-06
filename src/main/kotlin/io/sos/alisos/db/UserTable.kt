@@ -26,30 +26,26 @@ data class UserRecord(
 ) {
     fun fill(user: User): UserRecord =
         this
-            .setAnamnesis(user.anamnesis)
-            .setAddress(user.address)
-            .setPhone(user.phone)
+            .fillAnamnesis(user.anamnesis)
+            .fillAddress(user.address)
+            .fillPhone(user.phone)
 
 
-    fun setAnamnesis(anamnesis: String?): UserRecord =
+    fun fillAnamnesis(anamnesis: String?): UserRecord =
         if (this.anamnesis != anamnesis) {
-            val newAnamnesis =
-                if (anamnesis.isNullOrBlank())
-                    this.anamnesis
-                else
-                    "${this.anamnesis ?: ""}\n$anamnesis"
+            val newAnamnesis = listOfNotNull(this.anamnesis, anamnesis).joinToString("\n")
 
             this.copy(anamnesis = newAnamnesis, anamnesisDateModified = DateTime.now())
         } else this
 
 
-    fun setAddress(address: String?): UserRecord =
-        if (this.address != address) {
+    fun fillAddress(address: String?): UserRecord =
+        if (address != null && this.address != address) {
             this.copy(address = address, addressDateModified = DateTime.now())
         } else this
 
-    fun setPhone(phone: String?): UserRecord =
-        if (this.phone != phone) {
+    fun fillPhone(phone: String?): UserRecord =
+        if (phone != null && this.phone != phone) {
             this.copy(phone = phone, phoneDateModified = DateTime.now())
         } else this
 

@@ -37,7 +37,7 @@ class UserRepository {
         return this[user.id]
     }
 
-    fun updateAnamnesis(id: String, anamnesis: String): UserRecord {
+    fun updateAnamnesis(id: String, anamnesis: String?): UserRecord {
         transaction {
             execUpdate(id) {
                 it[this.anamnesis] = anamnesis
@@ -48,7 +48,7 @@ class UserRepository {
         return this[id]
     }
 
-    fun updateAddress(id: String, address: String): UserRecord {
+    fun updateAddress(id: String, address: String?): UserRecord {
         transaction {
             execUpdate(id) {
                 it[this.address] = address
@@ -59,7 +59,7 @@ class UserRepository {
         return this[id]
     }
 
-    fun updatePhone(id: String, phone: String): UserRecord {
+    fun updatePhone(id: String, phone: String?): UserRecord {
         transaction {
             execUpdate(id) {
                 it[this.phone] = phone

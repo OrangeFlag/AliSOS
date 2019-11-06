@@ -1,9 +1,9 @@
 package io.sos.alisos.service
 
-import io.sos.alisos.db.UserRepository
 import io.micronaut.http.HttpStatus
 import io.sos.alisos.client.MockClinicClientImpl
 import io.sos.alisos.client.UserClinicRequest
+import io.sos.alisos.db.UserRepository
 import io.sos.alisos.domain.Response
 import io.sos.alisos.domain.User
 import org.slf4j.LoggerFactory
@@ -40,14 +40,14 @@ open class AliceServiceImpl : AliceService {
             clinic.patient(
                 UserClinicRequest(
                     userId,
-                    actualUser.anamnesis,
-                    actualUser.address,
-                    actualUser.phone,
+                    updatedUser.anamnesis,
+                    updatedUser.address,
+                    updatedUser.phone,
                     doctorType
                 )
             )?.let {
                 if (it.blockingFirst().status == HttpStatus.OK) {
-                    userRepository.updateAnamnesis(user_id, "")
+                    userRepository.updateAnamnesis(userId, null)
                     return@let Response(true, "Готово! Сейчас позвонит врач.")
                 }
                 return@let null
