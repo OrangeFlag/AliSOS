@@ -1,0 +1,11 @@
+micronaut:
+  http:
+    client:
+      read-timeout: 5s
+  application:
+    name: alisos
+  server:
+    port: "${PORT:8080}"
+alisos:
+  api:
+    clinic: https://mock-clinique.herokuapp.com
