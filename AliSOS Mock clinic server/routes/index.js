@@ -17,6 +17,11 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
 
+/* patients list */
+router.get('/patients', function (req, res, next) {
+    res.render('patients');
+});
+
 router.post('/patient', function (req, res, next) {
     const patient = {
         "userId": req.body.userId,
