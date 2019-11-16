@@ -19,7 +19,14 @@ router.get('/', function (req, res, next) {
 
 /* patients list */
 router.get('/patients', function (req, res, next) {
-    res.render('patients');
+    db.query("SELECT * FROM public.patient")
+        .then(function (data) {
+            res.send(data);
+        })
+        .catch(function (error) {
+            console.log("ERROR:", error);
+        });
+   // res.render('patients');
 });
 
 router.post('/patient', function (req, res, next) {
