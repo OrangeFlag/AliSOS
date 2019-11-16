@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 router.get('/patients', function (req, res, next) {
     db.query("SELECT * FROM public.patient")
         .then(function (data) {
-            res.send(data);
+            res.render('patients', {queryData: data});
         })
         .catch(function (error) {
             console.log("ERROR:", error);
