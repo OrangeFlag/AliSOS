@@ -1,0 +1,25 @@
+extends layout
+block links
+    link(rel='stylesheet', href='/stylesheets/patients.css')
+
+block content
+    p(class='tableName') patients
+    div(class='columnHeader')
+        div anamnesis
+        div address
+        div phone
+        div time
+        div doctorType
+    ul(class='list')
+        each row in queryData
+            li
+                div(class = 'listElement')
+                    div(class = 'anamnesis')= row.anamnesis
+                    div(class = 'address')= row.address
+                    div(class = 'phone')= row.phone
+                    div(class = 'time')= row.time
+                    div(class = 'doctorType')= row.doctorType || 'doctor is not assigned'
+
+        else
+            li there is no patients data
+

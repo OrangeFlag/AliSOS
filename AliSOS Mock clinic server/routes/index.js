@@ -17,6 +17,18 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
 
+/* patients list */
+router.get('/patients', function (req, res, next) {
+    db.query("SELECT * FROM public.patient")
+        .then(function (data) {
+            res.render('patients', {queryData: data});
+        })
+        .catch(function (error) {
+            console.log("ERROR:", error);
+        });
+   // res.render('patients');
+});
+
 router.post('/patient', function (req, res, next) {
     const patient = {
         "userId": req.body.userId,
