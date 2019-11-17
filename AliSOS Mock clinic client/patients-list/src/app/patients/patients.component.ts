@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PATIENTS } from "../mock-patients";
+import {Component, OnInit} from '@angular/core';
+import {PatientsService} from "../patients.service";
 
 @Component({
   selector: 'app-patients',
@@ -8,11 +8,18 @@ import { PATIENTS } from "../mock-patients";
 })
 export class PatientsComponent implements OnInit {
 
-  patients = PATIENTS;
+  patients = [];
 
-  constructor() { }
+  getPatients(): void {
+    this.patientService.getPatients()
+      .subscribe(patients => this.patients = patients);
+  }
+
+  constructor(private patientService: PatientsService) {
+  }
 
   ngOnInit() {
+    this.getPatients();
   }
 
 }
