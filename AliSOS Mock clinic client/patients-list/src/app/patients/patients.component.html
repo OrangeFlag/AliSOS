@@ -1,1 +1,15 @@
 <p>patients works!</p>
+<ul class="patientList">
+
+  <li *ngFor="let patient of patients">
+    <div class="listElement">
+      <div class="anamnesis">{{patient.anamnesis}}</div>
+      <div class="address">{{patient.address}}</div>
+      <div class="phone">{{patient.phone}}</div>
+      <div class="time">{{patient.time}}</div>
+      <div class="doctorType" *ngIf="patient.doctortype; else elseBlock">{{patient.doctortype}}</div>
+      <ng-template #elseBlock><div class="doctorType">doctor is not assigned</div></ng-template>
+    </div>
+  </li>
+
+</ul>

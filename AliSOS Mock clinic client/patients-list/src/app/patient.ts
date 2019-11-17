@@ -5,7 +5,7 @@ export class Patient {
   address: string;
   phone: string;
   doctortype: string;
-  time: string;
+  time: Date;
 }
 
 
