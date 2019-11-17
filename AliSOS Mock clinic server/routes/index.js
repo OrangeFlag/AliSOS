@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var cors = require('cors');
+var path = require('path');
 
 
 var pgp = require("pg-promise")();
@@ -17,6 +18,11 @@ var db = pgp(process.env.DB_URL || dbUrl.postgresUrl);
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
+
+router.get('/patients-list', function (req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/dist/patients-list/index.html'));
+});
+
 
 /* patients list */
 router.get('/patients', function (req, res, next) {
