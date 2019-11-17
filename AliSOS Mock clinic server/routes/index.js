@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/patients-list', function (req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/dist/patients-list/index.html'));
+    res.sendFile(path.join(__dirname, '../public/patients-list/index.html'));
 });
 
 

@@ -7,8 +7,17 @@ import {PatientsService} from "../patients.service";
   styleUrls: ['./patients.component.css']
 })
 export class PatientsComponent implements OnInit {
+  date = new Date(Date.now());
 
   patients = [];
+
+  formatDate(date: Date): Date {
+    return new Date(date);
+  }
+
+  formatAnamnesis(anamnesis: string): string[] {
+    return anamnesis.split("\n");
+  }
 
   getPatients(): void {
     this.patientService.getPatients()

@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>patients works!</p>\n<ul class=\"patientList\">\n\n  <li *ngFor=\"let patient of patients\">\n    <div class=\"listElement\">\n      <div class=\"anamnesis\">{{patient.anamnesis}}</div>\n      <div class=\"address\">{{patient.address}}</div>\n      <div class=\"phone\">{{patient.phone}}</div>\n      <div class=\"time\">{{patient.time}}</div>\n      <div class=\"doctorType\" *ngIf=\"patient.doctortype; else elseBlock\">{{patient.doctortype}}</div>\n      <ng-template #elseBlock><div class=\"doctorType\">doctor is not assigned</div></ng-template>\n    </div>\n  </li>\n\n</ul>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"columnHeader\">\n  <div>anamnesis</div>\n  <div>address</div>\n  <div>phone</div>\n  <div>time</div>\n  <div>doctorType</div>\n</div>\n<ul class=\"patientList\">\n\n  <li *ngFor=\"let patient of patients\">\n    <div class=\"listElement\">\n      <ul class=\"anamnesis\">\n        <li *ngFor=\"let row of formatAnamnesis(patient.anamnesis)\">\n          {{row}}\n        </li>\n      </ul>\n      <div class=\"address\">{{patient.address}}</div>\n      <div class=\"phone\">{{patient.phone}}</div>\n      <div class=\"time\">{{formatDate(patient.time)}}</div>\n      <div class=\"doctorType\" *ngIf=\"patient.doctortype; else elseBlock\">{{patient.doctortype}}</div>\n      <ng-template #elseBlock><div class=\"doctorType\">doctor is not assigned</div></ng-template>\n    </div>\n  </li>\n\n</ul>\n");
 
 /***/ }),
 
@@ -337,7 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppComponent = class AppComponent {
     constructor() {
-        this.title = 'patients-list';
+        this.title = 'patients';
     }
 };
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -445,7 +445,7 @@ PatientsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhdGllbnRzL3BhdGllbnRzLmNvbXBvbmVudC5jc3MifQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".listElement {\r\n  display: grid;\r\n  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;\r\n  border-color: #cabdbd;\r\n  border-style: groove;\r\n}\r\n\r\n.columnHeader {\r\n  display: grid;\r\n  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;\r\n  text-align: center;\r\n}\r\n\r\n.patientList {\r\n  list-style: none outside none;\r\n  padding-left: 0;\r\n}\r\n\r\n.tableName {\r\n  font-size: xx-large;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGF0aWVudHMvcGF0aWVudHMuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQWE7RUFDYiwwQ0FBMEM7RUFDMUMscUJBQXFCO0VBQ3JCLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLGFBQWE7RUFDYiwwQ0FBMEM7RUFDMUMsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsNkJBQTZCO0VBQzdCLGVBQWU7QUFDakI7O0FBQ0E7RUFDRSxtQkFBbUI7QUFDckIiLCJmaWxlIjoic3JjL2FwcC9wYXRpZW50cy9wYXRpZW50cy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxpc3RFbGVtZW50IHtcclxuICBkaXNwbGF5OiBncmlkO1xyXG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogM2ZyIDFmciAxZnIgMWZyIDFmcjtcclxuICBib3JkZXItY29sb3I6ICNjYWJkYmQ7XHJcbiAgYm9yZGVyLXN0eWxlOiBncm9vdmU7XHJcbn1cclxuXHJcbi5jb2x1bW5IZWFkZXIge1xyXG4gIGRpc3BsYXk6IGdyaWQ7XHJcbiAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAzZnIgMWZyIDFmciAxZnIgMWZyO1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLnBhdGllbnRMaXN0IHtcclxuICBsaXN0LXN0eWxlOiBub25lIG91dHNpZGUgbm9uZTtcclxuICBwYWRkaW5nLWxlZnQ6IDA7XHJcbn1cclxuLnRhYmxlTmFtZSB7XHJcbiAgZm9udC1zaXplOiB4eC1sYXJnZTtcclxufVxyXG4iXX0= */");
 
 /***/ }),
 
@@ -468,7 +468,14 @@ __webpack_require__.r(__webpack_exports__);
 let PatientsComponent = class PatientsComponent {
     constructor(patientService) {
         this.patientService = patientService;
+        this.date = new Date(Date.now());
         this.patients = [];
+    }
+    formatDate(date) {
+        return new Date(date);
+    }
+    formatAnamnesis(anamnesis) {
+        return anamnesis.split("\n");
     }
     getPatients() {
         this.patientService.getPatients()

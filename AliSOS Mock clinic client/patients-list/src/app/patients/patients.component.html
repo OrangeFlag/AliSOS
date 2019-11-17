@@ -1,12 +1,22 @@
-<p>patients works!</p>
+<div class="columnHeader">
+  <div>anamnesis</div>
+  <div>address</div>
+  <div>phone</div>
+  <div>time</div>
+  <div>doctorType</div>
+</div>
 <ul class="patientList">
 
   <li *ngFor="let patient of patients">
     <div class="listElement">
-      <div class="anamnesis">{{patient.anamnesis}}</div>
+      <ul class="anamnesis">
+        <li *ngFor="let row of formatAnamnesis(patient.anamnesis)">
+          {{row}}
+        </li>
+      </ul>
       <div class="address">{{patient.address}}</div>
       <div class="phone">{{patient.phone}}</div>
-      <div class="time">{{patient.time}}</div>
+      <div class="time">{{formatDate(patient.time)}}</div>
       <div class="doctorType" *ngIf="patient.doctortype; else elseBlock">{{patient.doctortype}}</div>
       <ng-template #elseBlock><div class="doctorType">doctor is not assigned</div></ng-template>
     </div>
