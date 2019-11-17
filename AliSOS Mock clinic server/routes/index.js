@@ -26,8 +26,19 @@ router.get('/patients', function (req, res, next) {
         .catch(function (error) {
             console.log("ERROR:", error);
         });
-   // res.render('patients');
 });
+
+/* patients API */
+router.get('/api/patients', function (req, res, next) {
+    db.query("SELECT * FROM public.patient")
+        .then(function (data) {
+            res.send(data);
+        })
+        .catch(function (error) {
+            console.log("ERROR:", error);
+        });
+});
+
 
 router.post('/patient', function (req, res, next) {
     const patient = {
