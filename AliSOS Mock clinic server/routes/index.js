@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors');
 
 
 var pgp = require("pg-promise")();
@@ -29,7 +30,7 @@ router.get('/patients', function (req, res, next) {
 });
 
 /* patients API */
-router.get('/api/patients', function (req, res, next) {
+router.get('/api/patients', cors(), function (req, res, next) {
     db.query("SELECT * FROM public.patient")
         .then(function (data) {
             res.send(data);
