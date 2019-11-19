@@ -1,8 +1,8 @@
 package io.sos.alisos.service
 
+import io.sos.alisos.domain.MessageInfo
 import io.sos.alisos.domain.Response
-import io.sos.alisos.domain.User
 
 interface AliceService {
-    fun webhook(userId: String, user: User): Response
+    fun webhook(userId: String, messageInfo: MessageInfo): Response
 }

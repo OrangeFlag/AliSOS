@@ -28,13 +28,13 @@ dependencies {
     kapt("io.micronaut:micronaut-inject-java:1.2.5")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut:micronaut-http-server-netty")
-    implementation("org.slf4j:slf4j-simple:1.7.28")
     implementation("org.slf4j:slf4j-api:1.7.28")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("org.jetbrains.exposed:exposed:0.16.1")
     implementation("org.postgresql:postgresql:42.2.6")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
 }
 
 tasks.withType<ShadowJar> {

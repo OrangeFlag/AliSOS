@@ -1,11 +1,13 @@
 micronaut:
   http:
-    client:
-      read-timeout: 5s
+    services:
+      clinic:
+        urls:
+          - https://mock-clinique.herokuapp.com
+        read-timeout: 1s
+        connect-timeout: 1s
+        connect-ttl: 1s
   application:
     name: alisos
   server:
     port: "${PORT:8080}"
-alisos:
-  api:
-    clinic: https://mock-clinique.herokuapp.com

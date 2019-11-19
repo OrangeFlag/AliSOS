@@ -11,12 +11,12 @@ import javax.inject.Inject
 class MockClinicClientImpl : ClinicClient {
 
 
-    @field:Client("https://mock-clinique.herokuapp.com")
+    @field:Client("clinic")
     @Inject
     private lateinit var httpClient: RxHttpClient
 
 
-    override fun patient(user: UserClinicRequest): Flowable<HttpResponse<UserClinicResponse>>? {
+    override fun patient(user: UserClinicRequest): Flowable<HttpResponse<UserClinicResponse>> {
         return httpClient.exchange(POST("/patient", user), UserClinicResponse::class.java)
     }
 }
