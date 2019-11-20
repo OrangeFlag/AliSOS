@@ -78,7 +78,7 @@ open class Request {
 
     lateinit var originalUtterance: String
 
-    lateinit var nlu: NLU
+    var nlu: NLU? = null
 }
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
