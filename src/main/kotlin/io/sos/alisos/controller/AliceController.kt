@@ -25,12 +25,12 @@ class AliceController {
 
         val user = MessageInfo(
             anamnesis = request.request.originalUtterance,
-            address = request.request.nlu.entities.singleOrNull { x -> x.type == "YANDEX.GEO" }?.yandexGeo?.let { "${it.street} ${it.houseNumber}" },
+            address = request.request.nlu?.entities?.singleOrNull { x -> x.type == "YANDEX.GEO" }?.yandexGeo?.let { "${it.street} ${it.houseNumber}" },
             phone = Regex("""\+?[\d-()]{10,20}""").let {
                 it.find(request.request.originalUtterance)?.value
             },
-            yes = request.request.nlu.tokens.any { it.equals("да", true) },
-            no = request.request.nlu.tokens.any { it.equals("нет", true) }
+            yes = request.request.nlu?.tokens?.any { it.equals("да", true) } ?: false,
+            no = request.request.nlu?.tokens?.any { it.equals("нет", true) } ?: false
         )
 
         return ResponseWrapper(
