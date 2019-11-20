@@ -1,20 +1,24 @@
-.listElement {
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
-  border-color: #cabdbd;
-  border-style: groove;
+.mat-table {
+  white-space: pre-line;
 }
 
-.columnHeader {
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
-  text-align: center;
+.mat-column-anamnesis {
+  width: 40%;
 }
 
-.patientList {
-  list-style: none outside none;
-  padding-left: 0;
+.mat-column-time {
+  width: 15%;
 }
-.tableName {
-  font-size: xx-large;
+
+.mat-column-address {
+  width: 25%;
 }
+
+.mat-column-phone {
+  width: 10%;
+}
+
+.mat-column-doctorType {
+  width: 10%;
+}
+

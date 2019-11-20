@@ -1,25 +1,36 @@
-<div class="columnHeader">
-  <div>anamnesis</div>
-  <div>address</div>
-  <div>phone</div>
-  <div>time</div>
-  <div>doctorType</div>
+<div class="matTable">
+  <table mat-table [dataSource]="patients">
+    <ng-container matColumnDef="anamnesis">
+      <th mat-header-cell *matHeaderCellDef>Anamnesis</th>
+      <td mat-cell *matCellDef="let patient">
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let row of formatAnamnesis(patient.anamnesis)">
+            <mat-icon matListIcon>label_important</mat-icon>
+            {{row}}
+          </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell *matCellDef="let patient"> {{patient.address}} </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone number</th>
+      <td mat-cell *matCellDef="let patient"> {{patient.phone}} </td>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let patient"> {{formatDate(patient.time)}} </td>
+    </ng-container>
+    <ng-container matColumnDef="doctorType">
+      <th mat-header-cell *matHeaderCellDef>Assigned doctor</th>
+      <td mat-cell *matCellDef="let patient"> {{patient.doctortype || 'doctor is not assigned'}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
+
 </div>
-<ul class="patientList">
 
-  <li *ngFor="let patient of patients">
-    <div class="listElement">
-      <ul class="anamnesis">
-        <li *ngFor="let row of formatAnamnesis(patient.anamnesis)">
-          {{row}}
-        </li>
-      </ul>
-      <div class="address">{{patient.address}}</div>
-      <div class="phone">{{patient.phone}}</div>
-      <div class="time">{{formatDate(patient.time)}}</div>
-      <div class="doctorType" *ngIf="patient.doctortype; else elseBlock">{{patient.doctortype}}</div>
-      <ng-template #elseBlock><div class="doctorType">doctor is not assigned</div></ng-template>
-    </div>
-  </li>
 
-</ul>

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientsService} from "../patients.service";
+import {MatTable} from '@angular/material/table';
 
 @Component({
   selector: 'app-patients',
@@ -10,6 +11,7 @@ export class PatientsComponent implements OnInit {
   date = new Date(Date.now());
 
   patients = [];
+  columnsToDisplay = ['anamnesis', 'address', 'phone', 'time', 'doctorType'];
 
   formatDate(date: Date): Date {
     return new Date(date);
