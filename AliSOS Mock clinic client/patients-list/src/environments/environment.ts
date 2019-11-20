@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  getPatientsUrl: "http://localhost:3000/api/patients/"
+  apiUrl: "http://localhost:3000/"
 };
 
 /*
