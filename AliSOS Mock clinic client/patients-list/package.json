@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --outputPath=\"../../AliSOS Mock clinic server/public/patients-list/\" -- --base-href=\"/patients-list/\""
+    "postinstall": "ng build --prod --outputPath=\"../../AliSOS Mock clinic server/public/patients-list/\" -- --base-href=\"/patients-list/\""
   },
   "private": true,
   "dependencies": {
