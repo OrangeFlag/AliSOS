@@ -10,8 +10,10 @@ object Application {
     @JvmStatic
     fun main(args: Array<String>) {
         Database.connect(
-            url = System.getenv("DB_URL"), driver = "org.postgresql.Driver",
-            user = System.getenv("DB_USER"), password = System.getenv("DB_PASSWORD")
+            url = System.getenv("DB_URL"),
+            driver = "org.postgresql.Driver",
+            user = System.getenv("DB_USER"),
+            password = System.getenv("DB_PASSWORD")
         )
         transaction {
             SchemaUtils.createMissingTablesAndColumns(UserTable)
