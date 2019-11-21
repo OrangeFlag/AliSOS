@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "scripts": {
    "start": "cd \"AliSOS Mock clinic server\" && npm start",
-   "postinstall": "npm install --prefix \"AliSOS Mock clinic server\" && npm start"
+   "postinstall": "npm install --prefix \"AliSOS Mock clinic server\""
   }
 }
