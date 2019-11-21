@@ -30,7 +30,6 @@ paths:
     post:
       summary: Add a patient
       requestBody:
-        description: Optional description in *Markdown*
         required: true
         content:
           application/json:
