@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors');
+var path = require('path');
 
 
 var pgp = require("pg-promise")();
@@ -17,6 +19,11 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
 
+router.get('/patients-list', function (req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/patients-list/index.html'));
+});
+
+
 /* patients list */
 router.get('/patients', function (req, res, next) {
     db.query("SELECT * FROM public.patient")
@@ -26,8 +33,19 @@ router.get('/patients', function (req, res, next) {
         .catch(function (error) {
             console.log("ERROR:", error);
         });
-   // res.render('patients');
 });
+
+/* patients API */
+router.get('/api/patients', cors(), function (req, res, next) {
+    db.query("SELECT * FROM public.patient")
+        .then(function (data) {
+            res.send(data);
+        })
+        .catch(function (error) {
+            console.log("ERROR:", error);
+        });
+});
+
 
 router.post('/patient', function (req, res, next) {
     const patient = {
