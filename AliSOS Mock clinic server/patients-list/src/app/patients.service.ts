@@ -10,7 +10,8 @@ import {environment} from "../environments/environment";
   providedIn: 'root'
 })
 export class PatientsService {
-  private patientsUrl = environment.apiUrl + 'api/patients/'
+
+  private patientsUrl = "/api/patients/";
 
   getPatients(): Observable<Patient[]> {
     return this.http.get<Patient[]>(this.patientsUrl);
