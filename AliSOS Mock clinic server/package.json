@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "cd patients-list/ && npm install"
+    "postinstall": "cd patients-list/ && npm install && ng build --prod --outputPath=\"../public/patients-list/\" --base-href=\"/patients-list/\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -7,8 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --prod --outputPath=\"../public/patients-list/\" --base-href=\"/patients-list/\""
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
