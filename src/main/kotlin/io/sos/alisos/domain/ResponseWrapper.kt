@@ -4,13 +4,20 @@ import io.micronaut.core.annotation.Introspected
 
 @Introspected
 data class Response(
-    var end_session: Boolean = false,
-    var text: String = "Повторите запрос"
+    val end_session: Boolean = false,
+    val text: String = "Повторите запрос",
+    val buttons: List<Button> = emptyList()
+)
+
+@Introspected
+data class Button(
+    val title: String,
+    val hide: Boolean = true
 )
 
 @Introspected
 data class ResponseWrapper(
-    var session: Session,
-    var version: String,
-    var response: Response
+    val session: Session,
+    val version: String,
+    val response: Response
 )

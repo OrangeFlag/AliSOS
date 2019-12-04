@@ -17,6 +17,8 @@ class UserRepository {
             it[anamnesisDateModified] = user.anamnesisDateModified
             it[addressDateModified] = user.addressDateModified
             it[phoneDateModified] = user.phoneDateModified
+            it[waitingForAddressConfirmation] = user.waitingForAddressConfirmation
+            it[waitingForPhoneConfirmation] = user.waitingForPhoneConfirmation
         }
 
         return this[user.id]
@@ -31,6 +33,8 @@ class UserRepository {
                 it[anamnesisDateModified] = user.anamnesisDateModified
                 it[addressDateModified] = user.addressDateModified
                 it[phoneDateModified] = user.phoneDateModified
+                it[waitingForAddressConfirmation] = user.waitingForAddressConfirmation
+                it[waitingForPhoneConfirmation] = user.waitingForPhoneConfirmation
             }
         }
 
