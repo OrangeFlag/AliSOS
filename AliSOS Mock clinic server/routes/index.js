@@ -51,7 +51,7 @@ router.get('*', function (req, res, next) {
 });
 
 
-router.post('/patient', function (req, res, next) {
+router.post('/api/patient', function (req, res, next) {
     const patient = {
         "userId": req.body.userId,
         "anamnesis": req.body.anamnesis,
