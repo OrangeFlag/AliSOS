@@ -15,14 +15,13 @@ var db = pgp(process.env.DB_URL || dbUrl.postgresUrl);
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/index', function (req, res, next) {
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
 
 router.get('/patients-list', function (req, res, next) {
     res.sendFile(path.join(__dirname, '../public/patients-list/index.html'));
 });
-
 
 /* patients list */
 router.get('/patients', function (req, res, next) {
@@ -44,6 +43,11 @@ router.get('/api/patients', cors(), function (req, res, next) {
         .catch(function (error) {
             console.log("ERROR:", error);
         });
+});
+
+router.get('*', function (req, res, next) {
+    res.redirect('/patients-list');
+    res.render('index', {title: 'AliSOS Mock clinic'});
 });
 
 
