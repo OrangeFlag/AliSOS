@@ -19,8 +19,8 @@ router.get('/index', function (req, res, next) {
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
 
-router.get('/patients-list', function (req, res, next) {
-    res.sendFile(path.join(__dirname, '../public/patients-list/index.html'));
+router.get('/clinic-ui', function (req, res, next) {
+    res.sendFile(path.join(__dirname, '../public/clinic-ui/index.html'));
 });
 
 /* patients list */
@@ -46,7 +46,7 @@ router.get('/api/patients', cors(), function (req, res, next) {
 });
 
 router.get('*', function (req, res, next) {
-    res.redirect('/patients-list');
+    res.redirect('/clinic-ui');
     res.render('index', {title: 'AliSOS Mock clinic'});
 });
 

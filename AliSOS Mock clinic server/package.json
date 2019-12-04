@@ -1,10 +1,10 @@
 {
   "name": "alisosmock",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "cd patients-list/ && npm install && ng build --prod --outputPath=\"../public/patients-list/\" --base-href=\"/patients-list/\""
+    "postinstall": "cd clinic-ui/ && npm install && ng build --prod --outputPath=\"../public/clinic-ui/\" --base-href=\"/clinic-ui/\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

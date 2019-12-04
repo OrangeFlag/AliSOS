@@ -1,6 +1,6 @@
 {
-  "name": "patients-list",
-  "version": "0.0.0",
+  "name": "clinic-ui",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
