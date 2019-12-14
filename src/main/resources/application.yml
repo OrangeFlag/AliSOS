@@ -3,7 +3,7 @@ micronaut:
     services:
       clinic:
         urls:
-          - https://mock-clinique.herokuapp.com
+          - https://mock-clinique.herokuapp.com/api
         read-timeout: 1s
         connect-timeout: 1s
         connect-ttl: 1s
