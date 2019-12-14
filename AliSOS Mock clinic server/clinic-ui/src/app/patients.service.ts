@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Patient} from "./patient";
-import {PATIENTS} from "./mock-patients";
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from "../environments/environment";
