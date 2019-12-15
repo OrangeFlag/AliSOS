@@ -3,7 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-  p post to /patient
+  p post to /api/patient
   code: p(style='white-space:pre;')
           |{
           |  "userId": "string",
@@ -15,3 +15,6 @@ block content
 
   p get patients 
     a(href='/patients/') /patients
+
+  p get patients(differently)
+    a(href='/clinic-ui/') /clinic-ui
