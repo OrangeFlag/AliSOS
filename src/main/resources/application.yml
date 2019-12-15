@@ -11,3 +11,8 @@ micronaut:
     name: alisos
   server:
     port: "${PORT:8080}"
+database:
+  url: "${DB_URL}"
+  driver: "org.postgresql.Driver"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"

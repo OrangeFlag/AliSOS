@@ -1,13 +1,41 @@
 package io.sos.alisos.db
 
+import io.micronaut.context.annotation.Property
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.UpdateStatement
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.joda.time.DateTime
+import javax.annotation.PostConstruct
 import javax.inject.Singleton
 
 @Singleton
 class UserRepository {
+    @field:Property(name = "database.url")
+    lateinit var url: String
+
+    @field:Property(name = "database.driver")
+    lateinit var driver: String
+
+    @field:Property(name = "database.user")
+    lateinit var user: String
+
+    @field:Property(name = "database.password")
+    lateinit var password: String
+
+    @PostConstruct
+    fun initialize() {
+        Database.connect(
+            url = url,
+            driver = driver,
+            user = user,
+            password = password
+        )
+
+        transaction {
+            SchemaUtils.createMissingTablesAndColumns(UserTable)
+        }
+    }
+
     fun insert(user: UserRecord): UserRecord {
         UserTable.insert {
             it[id] = user.id

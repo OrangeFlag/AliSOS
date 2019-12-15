@@ -11,7 +11,6 @@ import javax.inject.Inject
 
 @Controller
 class AliceController {
-
     @Inject
     lateinit var service: AliceService
 
