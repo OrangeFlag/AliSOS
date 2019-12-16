@@ -3,7 +3,7 @@ package io.sos.alisos.client
 /**
  * Data that transfer to clinic
  *
- * @param userId
+ * @param userId user identificator
  * @param anamnesis description of user complaints
  * @param address address where the user is located
  * @param phone user phone
