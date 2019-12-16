@@ -5,6 +5,7 @@ plugins {
     kotlin("jvm") version "1.3.50"
     kotlin("kapt") version "1.3.50"
     id("com.github.johnrengelman.shadow") version "5.1.0"
+    id("org.jetbrains.dokka") version "0.10.0"
 }
 
 group = "io.sos"
@@ -42,6 +43,13 @@ tasks.withType<ShadowJar> {
         put("Main-Class", "io.sos.alisos.Application")
     }
     mergeServiceFiles()
+}
+
+tasks {
+    val dokka by getting(org.jetbrains.dokka.gradle.DokkaTask::class) {
+        outputFormat = "html"
+        outputDirectory = "$buildDir/dokka"
+    }
 }
 
 

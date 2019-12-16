@@ -1,13 +1,55 @@
 package io.sos.alisos.db
 
+import io.micronaut.context.annotation.Property
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.statements.UpdateStatement
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.joda.time.DateTime
+import javax.annotation.PostConstruct
 import javax.inject.Singleton
 
+/**
+ * Repository for users data
+ *
+ * @property url repository url
+ * @property driver repository driver
+ * @property user repository user
+ * @property password repository password
+ */
 @Singleton
 class UserRepository {
+    @field:Property(name = "database.url")
+    lateinit var url: String
+
+    @field:Property(name = "database.driver")
+    lateinit var driver: String
+
+    @field:Property(name = "database.user")
+    lateinit var user: String
+
+    @field:Property(name = "database.password")
+    lateinit var password: String
+
+    /**
+     * @suppress
+     */
+    @PostConstruct
+    fun initialize() {
+        Database.connect(
+            url = url,
+            driver = driver,
+            user = user,
+            password = password
+        )
+
+        transaction {
+            SchemaUtils.createMissingTablesAndColumns(UserTable)
+        }
+    }
+
+    /**
+     * insert record to repository
+     */
     fun insert(user: UserRecord): UserRecord {
         UserTable.insert {
             it[id] = user.id
@@ -24,6 +66,10 @@ class UserRepository {
         return this[user.id]
     }
 
+
+    /**
+     * update record in repository
+     */
     fun update(user: UserRecord): UserRecord {
         transaction {
             execUpdate(user.id) {
@@ -41,6 +87,9 @@ class UserRepository {
         return this[user.id]
     }
 
+    /**
+     * update user anamnesis by record id
+     */
     fun updateAnamnesis(id: String, anamnesis: String?): UserRecord {
         transaction {
             execUpdate(id) {
@@ -52,6 +101,9 @@ class UserRepository {
         return this[id]
     }
 
+    /**
+     * update user address by record id
+     */
     fun updateAddress(id: String, address: String?): UserRecord {
         transaction {
             execUpdate(id) {
@@ -63,6 +115,9 @@ class UserRepository {
         return this[id]
     }
 
+    /**
+     * update user phone by record id
+     */
     fun updatePhone(id: String, phone: String?): UserRecord {
         transaction {
             execUpdate(id) {
@@ -83,9 +138,15 @@ class UserRepository {
         return rowsUpdated
     }
 
+    /**
+     * get user record by id
+     */
     operator fun get(id: String): UserRecord = transaction { findOneById(id) }
         ?: throw Exception("UserRecord not found")
 
+    /**
+     * get user record by id or insert new record with that id
+     */
     fun getOrCreate(id: String): UserRecord = transaction {
         findOneById(id) ?: insert(UserRecord(id))
     }

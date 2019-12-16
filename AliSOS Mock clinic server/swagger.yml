@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  title: Clinic API
+  description: Clinic API for accepting statements for help from patients
+  version: 1.0.0
+paths:
+  /patient:
+    post:
+      summary: Add a patient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserClinicRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserClinicResponse'
+
+components:
+  schemas:
+    UserClinicRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        anamnesis:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+        doctorType:
+          type: string
+      required:
+        - userId
+        - anamnesis
+        - address
+        - phone
+    UserClinicResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/UserClinicRequest'
+        - type: object
+          properties:
+            timestamp:
+              type: integer
+              format: int64
+          required:
+            - timestamp

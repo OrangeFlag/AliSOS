@@ -7,7 +7,11 @@ import io.micronaut.http.client.annotation.Client
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-
+/**
+ * Mock implementation of clinic interface
+ *
+ * @property httpClient http client that injected in class with parameters from application.yaml
+ */
 class MockClinicClientImpl : ClinicClient {
 
 

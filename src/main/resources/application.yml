@@ -3,7 +3,7 @@ micronaut:
     services:
       clinic:
         urls:
-          - https://mock-clinique.herokuapp.com/api
+          - "${CLINIC_URL}"
         read-timeout: 1s
         connect-timeout: 1s
         connect-ttl: 1s
@@ -11,3 +11,8 @@ micronaut:
     name: alisos
   server:
     port: "${PORT:8080}"
+database:
+  url: "${DB_URL}"
+  driver: "org.postgresql.Driver"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"

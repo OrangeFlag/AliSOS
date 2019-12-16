@@ -12,6 +12,13 @@ import org.joda.time.DateTime
 import org.slf4j.LoggerFactory
 import javax.inject.Inject
 
+/**
+ * Service with business logic
+ *
+ * @property YES_NO_BUTTONS buttons to show in user interface
+ * @property userRepository a repository for storing information about the user
+ * @property clinic service for the registration request for emergency call
+ */
 open class AliceServiceImpl : AliceService {
 
     val YES_NO_BUTTONS = listOf(Button("Да"), Button("Нет"))
@@ -19,11 +26,10 @@ open class AliceServiceImpl : AliceService {
     @Inject
     lateinit var userRepository: UserRepository
 
-
     @Inject
     lateinit var clinic: MockClinicClientImpl
 
-    var logger = LoggerFactory.getLogger(AliceServiceImpl::class.java)
+    private var logger = LoggerFactory.getLogger(AliceServiceImpl::class.java)
 
     override fun webhook(userId: String, messageInfo: MessageInfo): Response {
         val userFromDb = userRepository.getOrCreate(userId)
@@ -88,6 +94,12 @@ open class AliceServiceImpl : AliceService {
         }
     }
 
+    /**
+     * compare [user] and [updates] and fill the value of the fields
+     *
+     * @param user user information from database
+     * @param updates information from user request
+     */
     private fun processUpdates(user: UserRecord, updates: MessageInfo): UserRecord {
         return user
             .let {
@@ -103,6 +115,9 @@ open class AliceServiceImpl : AliceService {
             }
     }
 
+    /**
+     * check whether the phone and address require confirmation from the user
+     */
     private fun setWaitingForConfirmationFlags(it: UserRecord): UserRecord {
         return it.copy(
             waitingForAddressConfirmation = it.addressDateModified?.isBefore(DateTime.now().minusHours(1)) ?: false,
@@ -110,12 +125,18 @@ open class AliceServiceImpl : AliceService {
         )
     }
 
+    /**
+     * updates the confirmation time that the address and phone are correct
+     */
     private fun processYes(it: UserRecord): UserRecord {
         return it
             .let { if (it.waitingForAddressConfirmation) it.touchAddress() else it }
             .let { if (it.waitingForPhoneConfirmation) it.touchPhone() else it }
     }
 
+    /**
+     * clears the address and phone number, as they are not valid at the moment
+     */
     private fun processNo(it: UserRecord): UserRecord {
         return it
             .let { if (it.waitingForAddressConfirmation) it.clearAddress() else it }

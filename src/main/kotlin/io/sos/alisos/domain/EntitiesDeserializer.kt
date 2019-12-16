@@ -8,9 +8,18 @@ import com.fasterxml.jackson.databind.JsonNode
 import java.io.IOException
 import java.math.BigDecimal
 
-
+/**
+ * Custom JSON deserializer for 'entity' in alice request
+ */
 class EntitiesDeserializer : JsonDeserializer<Entity?>() {
-    @Throws(IOException::class, JsonProcessingException::class)
+
+    /**
+     * deserialize Entity from json tree
+     *
+     * @throws IOException throws when I/O exception of some sort has occurred
+     * @throws JsonProcessingException throws for all problems encountered when processing (parsing, generating) JSON content
+     * @throws IllegalArgumentException throws when the arrived type is not known
+     */
     override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): Entity? {
 
         val objectCodec = jp.codec
