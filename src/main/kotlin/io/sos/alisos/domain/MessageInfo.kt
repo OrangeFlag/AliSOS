@@ -6,8 +6,8 @@ package io.sos.alisos.domain
  * @param anamnesis description of user complaints
  * @param address address where the user is located
  * @param phone user phone
- * @param yes user clicked yes
- * @param no user clicked no
+ * @param yes user clicked or said yes
+ * @param no user clicked or said no
  */
 data class MessageInfo(
     val anamnesis: String? = null,

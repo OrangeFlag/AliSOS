@@ -29,7 +29,7 @@ open class AliceServiceImpl : AliceService {
     @Inject
     lateinit var clinic: MockClinicClientImpl
 
-    var logger = LoggerFactory.getLogger(AliceServiceImpl::class.java)
+    private var logger = LoggerFactory.getLogger(AliceServiceImpl::class.java)
 
     override fun webhook(userId: String, messageInfo: MessageInfo): Response {
         val userFromDb = userRepository.getOrCreate(userId)

@@ -19,7 +19,7 @@ class AliceController {
     @Inject
     lateinit var service: AliceService
 
-    var logger = LoggerFactory.getLogger(AliceController::class.java)
+    private var logger = LoggerFactory.getLogger(AliceController::class.java)
 
     /**
      * request handler from Yandex Alice

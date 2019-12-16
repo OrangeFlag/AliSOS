@@ -109,6 +109,8 @@ open class Request {
 
 /**
  * Data received from Alice.
+ *
+ * [Alice protocol docs](https://yandex.ru/dev/dialogs/alice/doc/protocol-docpage/)
  */
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 @Introspected
