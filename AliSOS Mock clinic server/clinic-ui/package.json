@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build"
+    "postinstall": "ng build --prod --outputPath=\"../public/clinic-ui/\" --base-href=\"/clinic-ui/\"""
   },
   "private": true,
   "dependencies": {
