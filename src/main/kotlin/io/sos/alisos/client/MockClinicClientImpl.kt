@@ -21,7 +21,7 @@ class MockClinicClientImpl : ClinicClient {
 
 
     override fun patient(user: UserClinicRequest): Flowable<HttpResponse<UserClinicResponse>> {
-        return httpClient.exchange(POST("/patient", user), UserClinicResponse::class.java)
+        return httpClient.exchange(POST("/api/patient", user), UserClinicResponse::class.java)
     }
 }
 
